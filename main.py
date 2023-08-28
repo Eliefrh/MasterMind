@@ -34,7 +34,7 @@ def evaluate_guess(code_secret, guess):
         elif guess[i] in code_secret:
             bonne_couleur_mauvaise_position += 1
 
-    return bonne_position_couleur, bonne_couleur_mauvaise_position
+    return bonne_position_couleur * "!", bonne_couleur_mauvaise_position * "?"
 
 
 def main():
@@ -49,17 +49,19 @@ def main():
 
     reponse = input(
         "Choisissez " + '\033[92m' + f"{jouer}" + '\033[0m' + " pour jouer, " + '\033[92m' + f"{quitter}" + '\033[0m'
-        + " pour quitter et " + '\033[92m' + f"{credit}" + '\033[0m' + " pour les crédits : \n")
+        + " pour quitter et " + '\033[92m' + f"{credit}" + '\033[0m' + " pour les crédits : \n>>>")
+
 
     if reponse.upper() == jouer:
         for attempt in range(1, max_attempts + 1):
-            guess = input("Entrez votre supposition : ").upper()
+            guess = input("Entrez votre supposition : \n>>> ").upper()
 
             if len(guess) != code_length or any(color not in 'RGBYCP' for color in guess):
                 print("supposition invalide. SVP entrez un code valide.")
                 continue
 
             exact_matches, color_matches = evaluate_guess(secret_code, guess)
+
 
             if exact_matches == code_length:
                 print(f"félicitations! Vous avez deviné le code {secret_code} correctly")
