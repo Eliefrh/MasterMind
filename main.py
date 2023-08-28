@@ -38,8 +38,8 @@ def evaluate_guess(code_secret, guess):
 
 
 def main():
-    code_length = 4  # You can adjust the length of the secret code
-    max_attempts = 1000  # You can adjust the maximum number of attempts
+    code_length = 4  
+    max_attempts = 1000
     jouer = 'P'
     quitter = 'Q'
     credit = 'C'
@@ -56,19 +56,17 @@ def main():
             guess = input("Entrez votre supposition : ").upper()
 
             if len(guess) != code_length or any(color not in 'RGBYCP' for color in guess):
-                print("Invalid guess. Please enter a valid code.")
+                print("supposition invalide. SVP entrez un code valide.")
                 continue
 
             exact_matches, color_matches = evaluate_guess(secret_code, guess)
 
             if exact_matches == code_length:
-                print(f"Congratulations! You guessed the code {secret_code} correctly")
+                print(f"félicitations! Vous avez deviné le code {secret_code} correctly")
                 break
             else:
-                print(f"Exact matches: {exact_matches}, Color matches: {color_matches}")
+                print(f"Bonne position: {exact_matches}, bonne couleur: {color_matches}")
 
-            if attempt == max_attempts:
-                print(f"Sorry, you've run out of attempts. The secret code was {secret_code}.")
 
     if reponse.upper() == credit:
         print(f"[!!??]")
