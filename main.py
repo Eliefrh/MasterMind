@@ -69,12 +69,12 @@ def main():
 
 
     if reponse.upper() == credit:
-        print(f"[!!??]")
+        print("Nom de l'équipe : AntiBug \nKhalil, Elie et Dina")
+        main()
 
     if reponse.upper() == quitter:
         sys.exit()
-    else :
-        main()
+
 
 
 
