@@ -25,16 +25,17 @@ def generateur_code_secret(longueur):
 
 
 def evaluate_guess(code_secret, guess):
-    bonne_position_couleur = 0
-    bonne_couleur_mauvaise_position = 0
+    bonne_couleur_et_position = []
+    bonne_couleur_mauvaise_position = []
 
     for i in range(len(code_secret)):
         if guess[i] == code_secret[i]:
-            bonne_position_couleur += 1
-        elif guess[i] in code_secret:
+            bonne_couleur_et_position += 1
+
+        elif guess[i] in code_secret and guess[i] != code_secret[i]:
             bonne_couleur_mauvaise_position += 1
 
-    return bonne_position_couleur, bonne_couleur_mauvaise_position
+    return bonne_couleur_et_position, bonne_couleur_mauvaise_position
 
 
 def main():
