@@ -5,8 +5,8 @@ from colorama import init, Fore
 init(autoreset=True)
 
 
-def print_color(text, color):
-    print(color + text)
+def print_couleur(texte, couleur):
+    print(couleur + texte)
 
 
 titre = """
@@ -24,28 +24,30 @@ def generateur_code_secret(longueur):
     return code_secret
 
 
-def evaluate_guess(code_secret, guess):
-    bonne_position_couleur = 0
-    bonne_couleur_mauvaise_position = 0
+def evaluation_indice(code_secret, indice):
+    bonne_position_couleur = []
+    bonne_couleur_mauvaise_position = []
 
     for i in range(len(code_secret)):
-        if guess[i] == code_secret[i]:
-            bonne_position_couleur += 1
-        elif guess[i] in code_secret:
-            bonne_couleur_mauvaise_position += 1
+        if indice[i] == code_secret[i]:
+            bonne_position_couleur.append('!')
+        elif indice[i] in code_secret:
+            bonne_couleur_mauvaise_position.append('?')
 
-    return bonne_position_couleur * "!", bonne_couleur_mauvaise_position * "?"
+    return bonne_position_couleur , bonne_couleur_mauvaise_position
 
 
 def main():
-    code_length = 4  
-    max_attempts = 1000
+    longueur_code = 4  
+    max_essaye = 1000
     jouer = 'P'
     quitter = 'Q'
     credit = 'C'
 
-    secret_code = generateur_code_secret(code_length)
-    print_color(titre, Fore.RED)
+    code_secret = generateur_code_secret(longueur_code)
+    print_couleur(titre, Fore.RED)
+
+    print(code_secret)
 
     reponse = input(
         "Choisissez " + '\033[92m' + f"{jouer}" + '\033[0m' + " pour jouer, " + '\033[92m' + f"{quitter}" + '\033[0m'
@@ -53,21 +55,21 @@ def main():
 
 
     if reponse.upper() == jouer:
-        for attempt in range(1, max_attempts + 1):
-            guess = input("Entrez votre supposition : \n>>> ").upper()
+        for attempt in range(1, max_essaye + 1):
+            indice = input("Entrez votre supposition : \n>>> ").upper()
 
-            if len(guess) != code_length or any(color not in 'RGBYCP' for color in guess):
+            if len(indice) != longueur_code or any(color not in 'RGBYCP' for color in indice):
                 print("supposition invalide. SVP entrez un code valide.")
                 continue
 
-            exact_matches, color_matches = evaluate_guess(secret_code, guess)
+            exacte_position, couleur_position_exacte = evaluation_indice(code_secret, indice)
 
 
-            if exact_matches == code_length:
-                print(f"félicitations! Vous avez deviné le code {secret_code} correctly")
+            if exacte_position == longueur_code:
+                print(f"félicitations! Vous avez deviné le code {code_secret} correctly")
                 break
             else:
-                print(f"Bonne position: {exact_matches}, bonne couleur: {color_matches}")
+                print(f"Bonne position: {exacte_position}, bonne couleur: {couleur_position_exacte}")
 
 
     if reponse.upper() == credit:
