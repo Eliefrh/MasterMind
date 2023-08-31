@@ -27,24 +27,74 @@ def generateur_code_secret(longueur):
 def evaluate_guess(code_secret, guess):
     bonne_position_couleur = 0
     bonne_couleur_mauvaise_position = 0
+    list_guess = []
+    copie = code_secret.copy()
 
     for i in range(len(code_secret)):
-        if guess[i] == code_secret[i]:
-            bonne_position_couleur += 1
-        elif guess[i] in code_secret:
-            bonne_couleur_mauvaise_position += 1
+        print(copie)
+        if guess[i] == copie[i]:
+           list_guess.append("!")
+           copie[i] ==" "
+        continue
 
-    return bonne_position_couleur * "!", bonne_couleur_mauvaise_position * "?"
+        if guess[i] != code_secret[i] and guess[i] in copie[i] :
+            list_guess.append("?")
+
+
+        if guess[i] not in copie[i]:
+            list_guess.append(" ")
+
+
+        # vrai = False
+        # if guess[i] == code_secret[i]:
+        #     list_guess.append("!")
+        #     vrai = True
+        #
+        # if guess[i] in code_secret and vrai == False:
+        #
+        #         list_guess.append("?")
+        #
+        #
+        # if guess[i] not in code_secret :
+        #     list_guess.append(" ")
+
+
+
+
+    # for i in range(len(code_secret)):
+    #     if  guess[i] not in code_secret and len(list_guess) != len(guess):
+    #         list_guess.append(" ")
+    #     if guess[i] == code_secret[i] and len(list_guess) != len(guess):
+    #      #bonne_position_couleur += 1
+    #         list_guess.append("!")
+    #
+    #
+    #     if guess[i] in code_secret and len(list_guess) != len(guess) : list_guess.append("?")
+
+
+
+
+        # if guess[i] in code_secret:
+        #
+        #     bonne_couleur_mauvaise_position += 1
+        #     list_guess.append("?")
+        # else :
+        #     list_guess.append(" ")
+
+
+    return guess, list_guess
+           #bonne_position_couleur * "!", bonne_couleur_mauvaise_position * "?"
 
 
 def main():
-    code_length = 4  
+    code_length = 4
     max_attempts = 1000
     jouer = 'P'
     quitter = 'Q'
     credit = 'C'
 
     secret_code = generateur_code_secret(code_length)
+    print (secret_code)
     print_color(titre, Fore.RED)
 
     reponse = input(
@@ -63,11 +113,11 @@ def main():
             exact_matches, color_matches = evaluate_guess(secret_code, guess)
 
 
-            if exact_matches == code_length:
+            if exact_matches == secret_code:
                 print(f"félicitations! Vous avez deviné le code {secret_code} correctly")
                 break
             else:
-                print(f"Bonne position: {exact_matches}, bonne couleur: {color_matches}")
+                print(f" {exact_matches}, {color_matches}")
 
 
     if reponse.upper() == credit:
