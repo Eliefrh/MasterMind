@@ -21,25 +21,24 @@ titre = """
 def generateur_code_secret(longueur):
     couleurs = ['R', 'G', 'B', 'Y', 'C', 'P']  # Replace with your desired color options
     code_secret = random.choices(couleurs, k=longueur)
-    return code_secret
+    return ['R', 'B', 'B', 'R']
 
 
 def evaluation_indice(code_secret, indice):
     bonne_position_couleur = []
-    bonne_couleur_mauvaise_position = []
+   # bonne_couleur_mauvaise_position = []
 
     for i in range(len(code_secret)):
         if indice[i] == code_secret[i]:
             bonne_position_couleur.append('!')
-        elif indice[i] in code_secret:
-            bonne_couleur_mauvaise_position.append('?')
-
-    return bonne_position_couleur , bonne_couleur_mauvaise_position
+        elif indice[i] in code_secret :
+            bonne_position_couleur.append('?')            
+    return bonne_position_couleur 
 
 
 def main():
     longueur_code = 4  
-    max_essaye = 1000
+    max_essaye = 100
     jouer = 'P'
     quitter = 'Q'
     credit = 'C'
@@ -62,14 +61,14 @@ def main():
                 print("supposition invalide. SVP entrez un code valide.")
                 continue
 
-            exacte_position, couleur_position_exacte = evaluation_indice(code_secret, indice)
+            couleur_position_exacte = evaluation_indice(code_secret, indice)
 
 
-            if exacte_position == longueur_code:
+            if couleur_position_exacte == code_secret:
                 print(f"félicitations! Vous avez deviné le code {code_secret} correctly")
                 break
             else:
-                print(f"Bonne position: {exacte_position}, bonne couleur: {couleur_position_exacte}")
+                print(f"{couleur_position_exacte}")
 
 
     if reponse.upper() == credit:
