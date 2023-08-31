@@ -71,7 +71,7 @@ def main():
 
 
     if reponse.upper() == credit:
-        print("Nom de l'équipe : AntiBug \nKhalil, Elie et Dina")
+        print("Équipe : AntiBug \nLes membres: Khalil, Elie et Dina")
         main()
 
     if reponse.upper() == quitter:
