@@ -52,6 +52,8 @@ def main():
 
     secret_code = generateur_code_secret(code_length)
     print (secret_code)
+    resultat = (''.join(map(str, secret_code)))
+    print(resultat)
     print_color(titre, Fore.RED)
 
     reponse = input(
@@ -69,8 +71,7 @@ def main():
 
             exact_matches, color_matches = evaluate_guess(secret_code, guess)
 
-
-            if guess.upper() == exact_matches:
+            if guess.upper() == resultat:
                 print(f"félicitations! Vous avez deviné le code {secret_code} correctly")
                 break
             else:
