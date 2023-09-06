@@ -25,28 +25,27 @@ def generateur_code_secret(longueur):
 
 
 def evaluate_guess(code_secret, guess):
-    bonne_position_couleur = 0
-    bonne_couleur_mauvaise_position = 0
     list_guess = []
     copie = code_secret.copy()
-    compteur = 0
-
-    #while (compteur <= len(code_secret)):
 
 
     for i in range(len(code_secret) ):
+
+        #Vérifier si la lettre existe dans la liste et à la bonne position
              if guess[i] == copie[i] and len(list_guess) < len(copie):
                 list_guess.append("!")
                 copie[i] = ""
-
+        #Vérifier la presence de la lettre dans la liste, mais mauvais position
              elif guess[i] in copie and len(list_guess) < len(copie):
                  list_guess.append("?")
 
     for j in range(len(list_guess)):
 
-              if guess[j] not in copie and list_guess[j] != "!":
-                  list_guess[j] = ""
+        #Vérifier et effacer les caractères qui sont déjà évalués
+          if guess[j] not in copie and list_guess[j] != "!":
+              list_guess[j] = ""
 
+    #enlever les caractères vides avant de retourner l'evaluation
     for c in list_guess:
          if c == "":
           list_guess.remove(c)
@@ -67,7 +66,7 @@ def main():
     credit = 'C'
 
     secret_code = generateur_code_secret(code_length)
-    print (secret_code)
+    # print (secret_code)
     resultat = (''.join(map(str, secret_code)))
     print(resultat)
     print_color(titre, Fore.RED)
@@ -100,10 +99,6 @@ def main():
 
     if reponse.upper() == quitter:
         sys.exit()
-
-
-
-
 
 if __name__ == "__main__":
     main()
