@@ -29,8 +29,16 @@ def evaluate_guess(code_secret, guess):
     bonne_couleur_mauvaise_position = 0
     list_guess = []
     copie = code_secret.copy()
+    compteur = 0
 
-    for i in range(len(code_secret)):
+    while (compteur <= len(code_secret)):
+
+
+     for i in range(len(code_secret)):
+
+        if copie[i] == " " and list_guess[i] == "?":
+            list_guess[i].remove()
+
         if guess[i] == copie[i]:
            list_guess.append("!")
            copie[i] =" "
@@ -38,6 +46,12 @@ def evaluate_guess(code_secret, guess):
 
         if guess[i] in copie:
             list_guess.append("?")
+            copie[i] = " "
+
+
+
+    compteur += 1
+
 
 
     return guess, list_guess
