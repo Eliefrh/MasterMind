@@ -31,26 +31,29 @@ def evaluate_guess(code_secret, guess):
     copie = code_secret.copy()
     compteur = 0
 
-    while (compteur <= len(code_secret)):
+    #while (compteur <= len(code_secret)):
 
 
-     for i in range(len(code_secret)):
+    for i in range(len(code_secret) ):
+         if guess[i] == copie[i] and len(list_guess) < len(copie):
+             list_guess.append("!")
+             copie[i] = ""
+             # guess[i] = " "
+         elif guess[i] in copie and len(list_guess) < len(copie):
+             list_guess.append("?")
+             #copie[i] = ""
+             # guess[i] = " "
 
-        if copie[i] == " " and list_guess[i] == "?":
-            list_guess[i].remove()
+         for j in range(len(list_guess)):
 
-        if guess[i] == copie[i]:
-           list_guess.append("!")
-           copie[i] =" "
-           continue
-
-        if guess[i] in copie:
-            list_guess.append("?")
-            copie[i] = " "
+              if guess[j] not in copie and list_guess[j] != "!":
+                  list_guess[j] = ""
 
 
+    for c in list_guess:
+      if c != "!":
+       list_guess.remove(c)
 
-    compteur += 1
 
 
 
