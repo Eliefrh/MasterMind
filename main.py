@@ -6,7 +6,7 @@ import time
 init(autoreset=True)
 
 
-def print_color(text, color):
+def imprimer_couleur(text, color):
     print(color + text)
 
 
@@ -28,7 +28,7 @@ def generer_code_secret(longueur):
 def evaluer_indice(code_secret, indice) :
     liste_indice = []
     copie = code_secret.copy()
-
+    longueur = 4
     for i in range(len(code_secret)):
         # Vérifier si la lettre existe dans la liste et à la bonne position.
         if indice[i] == copie[i] and len(liste_indice) < len(copie):
@@ -45,36 +45,39 @@ def evaluer_indice(code_secret, indice) :
             liste_indice[j] = ""
 
         # enlever les caractères vides avant retourner evaluation
+
     for c in liste_indice:
         if c == "":
             liste_indice.remove(c)
 
-    for k in liste_indice:
-        if k == "":
-            liste_indice.remove(k)
+    # for k in liste_indice:
+    #     if k == "":
+    #         liste_indice.remove(k)
 
     return indice, liste_indice
 
 
 # afficher les 3 point une après l'autre avec un delay de 0.5
-def afficher_points(nbr_points, retard):
-    for _ in range(nbr_points):
+def afficher_points(nb_points, retard):
+    for _ in range(nb_points):
         sys.stdout.write(".")
         sys.stdout.flush()
         time.sleep(retard)
-    sys.stdout.write("  Au revoir!!")
+    print("  Au revoir!!")
 
 
 def main():
     code_longueur = 4
-    max_essayes = 1000
+    max_essaies = 1000
     jouer = 'J'
     quitter = 'Q'
     credit = 'C'
 
     code_secret = generer_code_secret(code_longueur)
     resultat = (''.join(map(str, code_secret)))
-    print_color(titre, Fore.RED)
+    imprimer_couleur(titre, Fore.RED)
+
+    print(code_secret)
 
     # recevoir la réponse de l'utilisateur/e pour les options de la menue
     reponse = input(
@@ -83,7 +86,7 @@ def main():
 
     # l'option "j" est pour commencer le jeu
     if reponse.upper() == jouer:
-        for essaye in range(1, max_essayes + 1):
+        for essaye in range(1, max_essaies + 1):
             indice = input("Entrez votre supposition : \n>>> ").upper()
 
             if len(indice) != code_longueur or any(couleur not in 'RGBYCP' for couleur in indice):
@@ -102,7 +105,7 @@ def main():
     if reponse.upper() == credit:
         print('\033[92m' + "Nom de l'équipe :" + '\033[0m' + "AntiBug \n" + '\033[92m' + "Les membres :"
               + '\033[0m' + " Khalil, Elie et Dina")
-        main()
+
 
     # l'option "q" est pour quitter le jeu
     if reponse.upper() == quitter:
