@@ -25,17 +25,17 @@ def generer_code_secret(longueur):
     return code_secret
 
 
-def evaluer_indice(code_secret, indice):
+def evaluer_indice(code_secret, indice) :
     liste_indice = []
     copie = code_secret.copy()
 
     for i in range(len(code_secret)):
-        # Vérifier si la lettre existe dans la liste et à la bonne position
+        # Vérifier si la lettre existe dans la liste et à la bonne position.
         if indice[i] == copie[i] and len(liste_indice) < len(copie):
             liste_indice.append("!")
             copie[i] = ""
 
-        # Vérifier la presence de la lettre dans la liste, mais mauvaise position
+        # Vérifier la presence de la lettre dans la liste, mais mauvaise position.
         elif indice[i] in copie and len(liste_indice) < len(copie):
             liste_indice.append("?")
 
@@ -62,12 +62,13 @@ def afficher_points(nbr_points, retard):
         sys.stdout.write(".")
         sys.stdout.flush()
         time.sleep(retard)
+    sys.stdout.write("  Au revoir!!")
 
 
 def main():
     code_longueur = 4
     max_essayes = 1000
-    jouer = 'P'
+    jouer = 'J'
     quitter = 'Q'
     credit = 'C'
 
@@ -106,6 +107,7 @@ def main():
     # l'option "q" est pour quitter le jeu
     if reponse.upper() == quitter:
         afficher_points(3, 0.5)
+
         sys.exit()
 
 
