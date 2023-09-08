@@ -45,13 +45,9 @@ def evaluer_indice(code_secret, indice) :
             liste_indice[j] = ""
 
         # enlever les caractères vides avant retourner evaluation
-    for c in liste_indice:
+    for c in reversed(liste_indice):
         if c == "":
             liste_indice.remove(c)
-
-    for k in liste_indice:
-        if k == "":
-            liste_indice.remove(k)
 
     return indice, liste_indice
 
@@ -59,10 +55,9 @@ def evaluer_indice(code_secret, indice) :
 # afficher les 3 point une après l'autre avec un delay de 0.5
 def afficher_points(nbr_points, retard):
     for _ in range(nbr_points):
-        sys.stdout.write(".")
-        sys.stdout.flush()
-        time.sleep(retard)
-    sys.stdout.write("  Au revoir!!")
+       print(".", end="",flush=True)
+       time.sleep(retard)
+    print("  Au revoir!!")
 
 
 def main():
@@ -75,6 +70,8 @@ def main():
     code_secret = generer_code_secret(code_longueur)
     resultat = (''.join(map(str, code_secret)))
     print_color(titre, Fore.RED)
+
+    print (code_secret)
 
     # recevoir la réponse de l'utilisateur/e pour les options de la menue
     reponse = input(
