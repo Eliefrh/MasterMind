@@ -45,24 +45,18 @@ def evaluer_indice(code_secret, indice) :
             liste_indice[j] = ""
 
         # enlever les caractères vides avant retourner evaluation
-
-    for c in liste_indice:
+    for c in reversed(liste_indice):
         if c == "":
             liste_indice.remove(c)
-
-    # for k in liste_indice:
-    #     if k == "":
-    #         liste_indice.remove(k)
 
     return indice, liste_indice
 
 
 # afficher les 3 point une après l'autre avec un delay de 0.5
-def afficher_points(nb_points, retard):
-    for _ in range(nb_points):
-        sys.stdout.write(".")
-        sys.stdout.flush()
-        time.sleep(retard)
+def afficher_points(nbr_points, retard):
+    for _ in range(nbr_points):
+       print(".", end="",flush=True)
+       time.sleep(retard)
     print("  Au revoir!!")
 
 
@@ -78,6 +72,8 @@ def main():
     imprimer_couleur(titre, Fore.RED)
 
     print(code_secret)
+
+    print (code_secret)
 
     # recevoir la réponse de l'utilisateur/e pour les options de la menue
     reponse = input(
