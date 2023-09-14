@@ -60,7 +60,9 @@ def afficher_points(nbr_points, retard):
     print("  Au revoir!!")
 
 
-def main():
+
+
+def afficher_menu():
     code_longueur = 4
     max_essayes = 1000
     jouer = 'J'
@@ -69,9 +71,8 @@ def main():
 
     code_secret = generer_code_secret(code_longueur)
     resultat = (''.join(map(str, code_secret)))
-    print_color(titre, Fore.RED)
 
-    print (code_secret)
+    print_color(titre, Fore.RED)
 
     # recevoir la réponse de l'utilisateur/e pour les options de la menue
     reponse = input(
@@ -106,6 +107,52 @@ def main():
         afficher_points(3, 0.5)
 
         sys.exit()
+
+
+def main():
+    afficher_menu()
+    # code_longueur = 4
+    # max_essayes = 1000
+    # jouer = 'J'
+    # quitter = 'Q'
+    # credit = 'C'
+    # code_secret = generer_code_secret(code_longueur)
+    # resultat = (''.join(map(str, code_secret)))
+    # print_color(titre, Fore.RED)
+    #
+    # # recevoir la réponse de l'utilisateur/e pour les options de la menue
+    # reponse = input(
+    #     "Choisissez " + '\033[92m' + f"{jouer}" + '\033[0m' + " pour jouer, " + '\033[92m' + f"{quitter}" + '\033[0m'
+    #     + " pour quitter et " + '\033[92m' + f"{credit}" + '\033[0m' + " pour les crédits : \n>>>")
+    #
+    # # l'option "j" est pour commencer le jeu
+    # if reponse.upper() == jouer:
+    #     for essaye in range(1, max_essayes + 1):
+    #         indice = input("Entrez votre supposition : \n>>> ").upper()
+    #
+    #         if len(indice) != code_longueur or any(couleur not in 'RGBYCP' for couleur in indice):
+    #             print("supposition invalide. SVP entrez un code valide.")
+    #             continue
+    #
+    #         bonne_couleur_position, bonne_couleur = evaluer_indice(code_secret, indice)
+    #
+    #         if indice.upper() == resultat:
+    #             print(f"félicitations! Vous avez deviné le code {code_secret} correctly")
+    #             break
+    #         else:
+    #             print(f" {bonne_couleur_position}, {bonne_couleur}")
+    #
+    # # l'option "c" est pour afficher le nom de l'équipe et les membres
+    # if reponse.upper() == credit:
+    #     print('\033[92m' + "Nom de l'équipe :" + '\033[0m' + "AntiBug \n" + '\033[92m' + "Les membres :"
+    #           + '\033[0m' + " Khalil, Elie et Dina")
+    #     main()
+    #
+    # # l'option "q" est pour quitter le jeu
+    # if reponse.upper() == quitter:
+    #     afficher_points(3, 0.5)
+    #
+    #     sys.exit()
 
 
 if __name__ == "__main__":
